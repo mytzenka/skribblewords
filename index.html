@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Skribble Words</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="index.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script type="module" src="index.js"></script>
+</head>
+
+<body>
+
+<div class="w3-container w3-green">
+    <h1>Skribble Words</h1>
+    <p>Add words to the super secret Skribble word list</p>
+</div>
+
+<div class="w3-row-padding">
+    <div class="w3-col" style="width:20%">
+    </div>
+
+    <div class="w3-rest">
+        <div class="w3-content w3-padding-large w3-margin-top">
+            <div class="w3-row w3-margin-top">
+                <div class="w3-row">
+                    <input class="submitButton" type="button" value="Submit list" disabled />
+                    <input class="fetchButton" type="button" value="Fetch all words" />
+                    <input class="copyButton" type="button" value="Copy to clipboard" />
+                </div>
+                <div class="w3-row w3-margin-top">
+                    <p class="allWordsHeader"></p>
+                    <p class="w3-black w3-text-black allWords prevent-select"></p>
+                </div>
+            </div>
+            <div class="w3-row">
+                <div class="w3-half">
+                    <input class="inputWord" type="text" placeholder="Enter word and hit enter ...">
+                </div>
+                <div class="w3-half">
+                    <ul class="w3-ul"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="w3-col" style="width:20%">
+    </div>
+</div>
+
+</body>
+</html>
