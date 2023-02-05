@@ -25,9 +25,9 @@
         <div class="w3-content w3-padding-large w3-margin-top">
             <div class="w3-row w3-margin-top">
                 <div class="w3-row">
-                    <input class="submitButton" type="button" value="Submit list" disabled />
-                    <input class="fetchButton" type="button" value="Fetch all words" />
-                    <input class="copyButton" type="button" value="Copy to clipboard" />
+                    <input id="submitButton" class="w3-btn w3-green" type="button" value="Submit list" disabled />
+                    <input id="fetchButton" class="w3-btn w3-green" type="button" value="Fetch all words" />
+                    <input id="copyButton" class="w3-btn w3-green" type="button" value="Copy to clipboard" disabled />
                 </div>
                 <div class="w3-row w3-margin-top">
                     <p class="allWordsHeader"></p>
@@ -36,7 +36,7 @@
             </div>
             <div class="w3-row">
                 <div class="w3-half">
-                    <input class="inputWord" type="text" placeholder="Enter word and hit enter ...">
+                    <input id="inputWord" class="w3-input w3-border" type="text" placeholder="Enter word and hit enter ..." pattern="[A-Za-z]">
                 </div>
                 <div class="w3-half">
                     <ul class="w3-ul"></ul>
@@ -46,6 +46,22 @@
     </div>
 
     <div class="w3-col" style="width:20%">
+    </div>
+</div>
+
+<div id="submitModal" class="w3-modal">
+    <div class="w3-modal-content">
+        <div class="w3-container">
+            <p>You are about to submit x words.
+            <span>x words are unknown in the database.</span></p>
+            <p>Are you sure?</p>
+            <div class="w3-row w3-margin-bottom">
+                <input id="inputName" class="w3-half w3-margin-right w3-left w3-input w3-border" type="text" placeholder="Enter or select your name ..." list="names">
+                <datalist id="names"></datalist>
+                <input id="submitFinalButton" class="w3-btn w3-green" type="button" value="Submit" disabled />
+                <input id="cancelSubmitButton" class="w3-btn w3-green" type="button" value="Cancel" />
+            </div>
+        </div>
     </div>
 </div>
 

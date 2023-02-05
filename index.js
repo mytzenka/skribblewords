@@ -1,61 +1,105 @@
-const mySubmitButton = document.querySelector(".submitButton")
-mySubmitButton.addEventListener("click", submitWords);
+const port = 3000;
 
-async function validateInput() {
+const inputWord = document.getElementById("inputWord")
+const submitFinalButton = document.getElementById("submitFinalButton")
+const submitButton = document.getElementById("submitButton")
+const cancelSubmitButton = document.getElementById('cancelSubmitButton')
+const copyClipboardButton = document.getElementById("copyButton")
+const fetchButton = document.getElementById( "fetchButton")
+const submitModal = document.getElementById('submitModal')
+const inputName = document.getElementById('inputName')
+inputWord.addEventListener("keyup", ({key}) => { if (key === "Enter") validateWordInput(); });
+inputName.addEventListener("input", () => validateNameInput());
+submitFinalButton.addEventListener("click", submitWords);
+submitFinalButton.addEventListener("click", hideSubmitModal);
+copyClipboardButton.addEventListener("click", copyWordsToClipboard);
+fetchButton.addEventListener("click", fetchAllWords);
+submitButton.addEventListener("click", showSubmitModal);
+cancelSubmitButton.addEventListener("click", hideSubmitModal);
+
+async function validateWordInput() {
+    const enteredWord = inputWord.value;
     const currentWords = Array.from(document.querySelectorAll('ul li'));
-    // const totalCorrect = document.querySelector('.quiz-total-correct');
-    if (currentWords.find((li) => (li.textContent.toLowerCase() === myInput.value.toLowerCase()))) {
-        addWordToList(myInput.value, 'red');
-    } else {
-        await axios.get(`https://api.dictionaryapi.dev/api/v2/entries/en/${myInput.value}`).then(resp => {
-            addWordToList(myInput.value, 'black');
+    const re = new RegExp("^[a-zA-Z\\s]{2,}$");
+
+    if (!re.test(enteredWord)) {
+        console.log(`Regex mismatch: ${enteredWord}`)
+        addWordToList(enteredWord, 'red');
+    } else if (currentWords.find((li) => (li.textContent.toLowerCase() === enteredWord.toLowerCase())))
+    {
+        console.log(`Duplicate word: ${enteredWord}`)
+        addWordToList(enteredWord, 'red');
+    } else
+    {
+        await axios.get(`https://api.dictionaryapi.dev/api/v2/entries/en/${enteredWord}`).then(() => {
+            addWordToList(enteredWord, 'black');
         }).catch(() => {
-            addWordToList(myInput.value, 'orange');
+            console.log(`Not found in dictionary: ${enteredWord}`)
+            addWordToList(enteredWord, 'orange');
         });
     }
 
-    mySubmitButton.disabled = false;
-    myInput.value = "";
+    submitButton.disabled = false;
+    inputWord.value = "";
+}
+
+function validateNameInput()
+{
+    console.log(inputName.value)
+    const re = new RegExp("^[a-zA-Z0-9 ]{2,}$");
+    submitFinalButton.disabled = !re.test(inputName.value);
 }
 
 function addWordToList(word, color) {
     const trash = document.createElement('i');
     trash.classList.add('fa', 'fa-trash', 'w3-margin-right');
-    trash.addEventListener('click', removeWord);
+    trash.addEventListener('click', removeWordFromList);
 
     const newWord = document.createElement('li');
-    newWord.innerText = word.toLowerCase();
+    newWord.innerText = word;
     newWord.classList.add(`w3-text-${color}`);
 
     document.querySelector('ul').appendChild(newWord).prepend(trash);
 }
 
-const myInput = document.querySelector(".inputWord")
-const myWord = document.querySelector('ul li')
-myInput.addEventListener("keyup", ({key}) => {
-    if (key === "Enter") validateInput();
-});
-
-
-
-function removeWord() {
+function removeWordFromList() {
     this.closest("li").remove();
 }
 
 function submitWords() {
     document.querySelectorAll('ul > li').forEach((i) => {
-        axios.post('http://localhost:3000/word', {
-            word: i.innerText.toLowerCase(),
-        })
-            .then(function (response) {
-                console.log(response);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+        axios.post(`http://localhost:${port}/word`, {
+            word: i.innerText,
+            name: inputName.value
+        }).then(function (response) {
+            console.log(response);
+        }).catch(function (error) {
+            console.log(error);
+        });
     })
     document.querySelector('ul').innerHTML = '';
-    mySubmitButton.disabled = true;
+    submitButton.disabled = true;
+}
+
+function showSubmitModal() {
+    submitModal.style.display='block';
+    axios.get(`http://localhost:${port}/names`)
+        .then((response) => populateNamesList(response))
+        .catch((error) => console.log(error))
+}
+
+function hideSubmitModal() {
+    submitModal.style.display='none';
+}
+
+function populateNamesList(response) {
+    const namesList = document.getElementById('names')
+    namesList.innerHTML = "";
+    response.data.forEach((d) => {
+        const nameOption = document.createElement('option');
+        nameOption.value = d.name;
+        namesList.appendChild(nameOption);
+    });
 }
 
 function displayAllWords(response) {
@@ -66,23 +110,28 @@ function displayAllWords(response) {
     });
 }
 
-document.querySelector(".copyButton").addEventListener("click", copyWordsToClipboard);
-function copyWordsToClipboard() {
-    const text = document.querySelector('.allWords').innerText;
-    if (text) {
-        navigator.clipboard.writeText(text);
-        console.log('Words copied to clipboard');
-        alert('Copied to clipboard');
-    }
-    else {
-        alert('Nothing to copy');
-    }
-
-}
-
-document.querySelector(".fetchButton").addEventListener("click", fetchAllWords);
 function fetchAllWords() {
-    axios.get('http://localhost:3000/words')
+    axios.get(`http://localhost:${port}/words`)
         .then((response) => {displayAllWords(response)})
         .catch((error) => {console.log(error)})
+
+    copyClipboardButton.disabled = false;
+}
+
+function copyWordsToClipboard() {
+    navigator.clipboard.writeText("");
+    const text = document.querySelector('.allWords').innerText;
+    if (text) {
+        navigator.clipboard.writeText(text).then(() => {
+            console.log('Words copied to clipboard');
+            alert('Words copied to clipboard');
+        }).catch(err => {
+            console.error('Failed to copy to clipboard: ', err);
+            alert('Failed to copy to clipboard');
+        });
+    }
+    else {
+        console.log('Nothing to copy to clipboard')
+        alert('Nothing to copy to clipboard');
+    }
 }

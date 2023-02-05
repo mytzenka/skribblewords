@@ -1,9 +1,11 @@
+require('dotenv').config();
+
 const express = require('express');
 const bodyParser = require('body-parser');
-const db = require('./queries');
+const query = require('./queries');
 const cors = require('cors');
 const app = express()
-const port = 3000
+const port = process.env.BACKEND_PORT;
 
 app.use(bodyParser.json())
 app.use(
@@ -18,8 +20,9 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
-app.get('/words', db.getWords)
-app.post('/word', db.addWord)
+app.get('/words', query.getWords)
+app.post('/word', query.addWord)
+app.get('/names', query.getNames)
 
 app.listen(port, () => {
     console.log(`App running on port ${port}.`)
