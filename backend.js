@@ -5,7 +5,11 @@ const bodyParser = require('body-parser');
 const query = require('./queries');
 const cors = require('cors');
 const app = express()
-const port = process.env.BACKEND_PORT;
+
+let port = process.env.PORT;
+if (port == null || port === "") {
+    port = 3000;
+}
 
 app.use(bodyParser.json())
 app.use(
