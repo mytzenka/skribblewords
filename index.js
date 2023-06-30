@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const inputWord = document.getElementById("inputWord")
 const submitFinalButton = document.getElementById("submitFinalButton")
 const submitButton = document.getElementById("submitButton")
