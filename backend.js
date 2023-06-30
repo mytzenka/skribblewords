@@ -3,7 +3,7 @@ require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const query = require('./queries');
-const cors = require('cors');
+// const cors = require('cors');
 const app = express()
 
 let port = process.env.PORT || 3000;
@@ -15,11 +15,11 @@ app.use(
     })
 )
 
-const corsOptions = {
-    origin: 'http://localhost:63342',
-    optionsSuccessStatus: 200
-};
-app.use(cors(corsOptions));
+// const corsOptions = {
+//     origin: 'http://localhost:63342',
+//     optionsSuccessStatus: 200
+// };
+// app.use(cors(corsOptions));
 
 app.get('/words', query.getWords)
 app.post('/word', query.addWord)
