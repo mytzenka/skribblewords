@@ -1,3 +1,5 @@
+const db_port = 3000
+
 const inputWord = document.getElementById("inputWord")
 const submitFinalButton = document.getElementById("submitFinalButton")
 const submitButton = document.getElementById("submitButton")
@@ -66,7 +68,7 @@ function removeWordFromList() {
 
 function submitWords() {
     document.querySelectorAll('ul > li').forEach((i) => {
-        axios.post(`http://localhost:${process.env.PORT}/word`, {
+        axios.post(`http://localhost:${db_port}/word`, {
             word: i.innerText,
             name: inputName.value
         }).then(function (response) {
@@ -81,7 +83,7 @@ function submitWords() {
 
 function showSubmitModal() {
     submitModal.style.display='block';
-    axios.get(`http://localhost:${process.env.PORT}/names`)
+    axios.get(`http://localhost:${db_port}/names`)
         .then((response) => populateNamesList(response))
         .catch((error) => console.log(error))
 }
@@ -109,7 +111,7 @@ function displayAllWords(response) {
 }
 
 function fetchAllWords() {
-    axios.get(`http://localhost:${process.env.PORT}/words`)
+    axios.get(`http://localhost:${db_port}/words`)
         .then((response) => {displayAllWords(response)})
         .catch((error) => {console.log(error)})
 
