@@ -24,7 +24,7 @@ SET default_table_access_method = heap;
 
 --
 -- TOC entry 215 (class 1259 OID 16396)
--- Name: names; Type: TABLE; Schema: public; Owner: postgres
+-- Name: names; Type: TABLE; Schema: public; Owner: oukoqphkbbslbh
 --
 
 CREATE TABLE public.names (
@@ -33,11 +33,11 @@ CREATE TABLE public.names (
 );
 
 
-ALTER TABLE public.names OWNER TO postgres;
+ALTER TABLE public.names OWNER TO oukoqphkbbslbh;
 
 --
 -- TOC entry 217 (class 1259 OID 16417)
--- Name: names_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: names_id_seq; Type: SEQUENCE; Schema: public; Owner: oukoqphkbbslbh
 --
 
 ALTER TABLE public.names ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
@@ -52,7 +52,7 @@ ALTER TABLE public.names ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
 
 --
 -- TOC entry 214 (class 1259 OID 16389)
--- Name: words; Type: TABLE; Schema: public; Owner: postgres
+-- Name: words; Type: TABLE; Schema: public; Owner: oukoqphkbbslbh
 --
 
 CREATE TABLE public.words (
@@ -62,11 +62,11 @@ CREATE TABLE public.words (
 );
 
 
-ALTER TABLE public.words OWNER TO postgres;
+ALTER TABLE public.words OWNER TO oukoqphkbbslbh;
 
 --
 -- TOC entry 216 (class 1259 OID 16416)
--- Name: words_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: words_id_seq; Type: SEQUENCE; Schema: public; Owner: oukoqphkbbslbh
 --
 
 ALTER TABLE public.words ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
@@ -81,7 +81,7 @@ ALTER TABLE public.words ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
 
 --
 -- TOC entry 3207 (class 2606 OID 16402)
--- Name: names names_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: names names_pkey; Type: CONSTRAINT; Schema: public; Owner: oukoqphkbbslbh
 --
 
 ALTER TABLE ONLY public.names
@@ -90,7 +90,7 @@ ALTER TABLE ONLY public.names
 
 --
 -- TOC entry 3205 (class 2606 OID 16409)
--- Name: words words_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: words words_pkey; Type: CONSTRAINT; Schema: public; Owner: oukoqphkbbslbh
 --
 
 ALTER TABLE ONLY public.words
@@ -99,7 +99,7 @@ ALTER TABLE ONLY public.words
 
 --
 -- TOC entry 3208 (class 2606 OID 16403)
--- Name: words words_nameid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: words words_nameid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: oukoqphkbbslbh
 --
 
 ALTER TABLE ONLY public.words
