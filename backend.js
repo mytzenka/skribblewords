@@ -6,7 +6,7 @@ const query = require('./queries');
 const cors = require('cors');
 const app = express()
 
-let port = process.env.PORT || 3000;
+const port = process.env.PORT || 3000;
 
 app.use(bodyParser.json())
 app.use(
@@ -16,7 +16,7 @@ app.use(
 )
 
 const corsOptions = {
-    origin: 'http://localhost:63342',
+    origin: 'http://localhost:3001',  // <-- HOW TO KNOW THIS WHEN DEPLOYED ON HEROKU?
     optionsSuccessStatus: 200
 };
 app.use(cors(corsOptions));
@@ -24,20 +24,8 @@ app.use(cors(corsOptions));
 app.get('/words', query.getWords)
 app.post('/word', query.addWord)
 app.get('/names', query.getNames)
-app.get('/db', async (req, res) => {
-        try {
-            const client = await pool.connect();
-            const result = await client.query('SELECT * FROM test_table');
-            const results = { 'results': (result) ? result.rows : null};
-            res.render('pages/db', results );
-            client.release();
-        } catch (err) {
-            console.error(err);
-            res.send("Error " + err);
-        }
-    })
-
 
 app.listen(port, () => {
     console.log(`App running on port ${port}.`)
+    query.testDB()
 })

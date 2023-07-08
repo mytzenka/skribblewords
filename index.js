@@ -1,5 +1,5 @@
-const port = 3000
-const baseUrl = "http://localhost"
+const port = 3000   // <-- HOW TO KNOW THIS WHEN DEPLOYED TO HEROKU?
+const baseUrl = "http://localhost"  // <-- HOW TO KNOW THIS WHEN DEPLOYED TO HEROKU?
 
 console.log(baseUrl);
 
