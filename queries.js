@@ -1,6 +1,8 @@
 require("express");
 
 const Pool = require('pg').Pool
+const Fs = require('fs');
+
 let options
 if (process.env.NODE_ENV === "production") {
     options = {
@@ -82,9 +84,21 @@ const testDB = () => {
     })
 }
 
+const createTables = () => {
+    const sql = Fs.readFileSync('Database.sql').toString();
+    pool.query(sql, function(err, result) {
+        if(err){
+            console.log('error: ', err);
+            process.exit(1);
+        }
+        process.exit(0);
+    });
+}
+
 module.exports = {
     getWords,
     addWord,
     getNames,
+    createTables,
     testDB
 }
