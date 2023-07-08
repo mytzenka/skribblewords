@@ -16,7 +16,7 @@ app.use(
 )
 
 // const corsOptions = {
-//     origin: `https://skribbl-words-1e746fdf2ac0.herokuapp.com:${port}`,  // <-- HOW TO KNOW THIS WHEN DEPLOYED ON HEROKU?
+//     origin: `https://skribbl-words-1e746fdf2ac0.herokuapp.com:${port}`,  //TODO <-- HOW TO SET THIS WHEN DEPLOYED ON HEROKU (WHEN NEEDED)?
 //     optionsSuccessStatus: 200
 // };
 // app.use(cors(corsOptions));

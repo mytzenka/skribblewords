@@ -1,7 +1,7 @@
-const port = 3000   // <-- HOW TO KNOW THIS WHEN DEPLOYED TO HEROKU?
-const baseUrl = "http://localhost"  // <-- HOW TO KNOW THIS WHEN DEPLOYED TO HEROKU?
+const port = 3000                   //TODO <-- HOW TO SET THIS WHEN DEPLOYED TO HEROKU?
+const baseUrl = "http://localhost"  //TODO <-- HOW TO SET THIS WHEN DEPLOYED TO HEROKU?
 
-console.log(baseUrl);
+console.log(window.location.href);
 
 const inputWord = document.getElementById("inputWord")
 const submitFinalButton = document.getElementById("submitFinalButton")
