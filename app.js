@@ -16,7 +16,7 @@ app.use(
 )
 
 const corsOptions = {
-    origin: 'http://localhost:3001',  // <-- HOW TO KNOW THIS WHEN DEPLOYED ON HEROKU?
+    origin: `https://skribbl-words-1e746fdf2ac0.herokuapp.com:${port}`,  // <-- HOW TO KNOW THIS WHEN DEPLOYED ON HEROKU?
     optionsSuccessStatus: 200
 };
 app.use(cors(corsOptions));
@@ -24,6 +24,11 @@ app.use(cors(corsOptions));
 app.get('/words', query.getWords)
 app.post('/word', query.addWord)
 app.get('/names', query.getNames)
+
+app.use(express.static('client'))
+app.get('*', (req, res) => {
+    res.sendFile('index.html')
+})
 
 app.listen(port, () => {
     console.log(`App running on port ${port}.`)

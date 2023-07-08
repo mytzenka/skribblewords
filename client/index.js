@@ -1,5 +1,5 @@
-const port = 3000   // <-- HOW TO KNOW THIS WHEN DEPLOYED TO HEROKU?
-const baseUrl = "http://localhost"  // <-- HOW TO KNOW THIS WHEN DEPLOYED TO HEROKU?
+const port = process.env.PORT || 3000   // <-- HOW TO KNOW THIS WHEN DEPLOYED TO HEROKU?
+const baseUrl = "https://skribbl-words-1e746fdf2ac0.herokuapp.com/"  // <-- HOW TO KNOW THIS WHEN DEPLOYED TO HEROKU?
 
 console.log(baseUrl);
 
