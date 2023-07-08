@@ -16,7 +16,7 @@ app.use(
 )
 
 const corsOptions = {
-    origin: `https://skribbl-words.herokuapp.com`,  //TODO <-- HOW TO SET THIS WHEN DEPLOYED ON HEROKU (WHEN NEEDED)?
+    origin: `*`,  //TODO <-- HOW TO SET THIS WHEN DEPLOYED ON HEROKU (WHEN NEEDED)?
     optionsSuccessStatus: 200
 };
 app.use(cors(corsOptions));
