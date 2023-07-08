@@ -3,7 +3,7 @@ require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const query = require('./queries');
-const cors = require('cors');
+// const cors = require('cors');
 const app = express()
 
 const port = process.env.PORT || 3000;
@@ -15,11 +15,11 @@ app.use(
     })
 )
 
-const corsOptions = {
-    origin: `https://skribbl-words-1e746fdf2ac0.herokuapp.com:${port}`,  // <-- HOW TO KNOW THIS WHEN DEPLOYED ON HEROKU?
-    optionsSuccessStatus: 200
-};
-app.use(cors(corsOptions));
+// const corsOptions = {
+//     origin: `https://skribbl-words-1e746fdf2ac0.herokuapp.com:${port}`,  // <-- HOW TO KNOW THIS WHEN DEPLOYED ON HEROKU?
+//     optionsSuccessStatus: 200
+// };
+// app.use(cors(corsOptions));
 
 app.get('/words', query.getWords)
 app.post('/word', query.addWord)
