@@ -1,5 +1,4 @@
-// const baseUrl = "http://localhost:3000"     //TODO <-- HOW TO SET THIS WHEN DEPLOYED TO HEROKU?
-const baseUrl = `${window.location.protocol}//${window.location.hostname}`
+const baseUrl = `${window.location.protocol}//${window.location.hostname}:${window.location.port}`
 
 const inputWord = document.getElementById("inputWord")
 const submitFinalButton = document.getElementById("submitFinalButton")
