@@ -16,7 +16,8 @@ app.use(
 )
 
 const corsOptions = {
-    origin: 'http://localhost:3000',  //TODO <-- HOW TO SET THIS WHEN DEPLOYED ON HEROKU (WHEN NEEDED)?
+    // origin: 'http://localhost:3000',  //TODO <-- HOW TO SET THIS WHEN DEPLOYED ON HEROKU (WHEN NEEDED)?
+    origin: process.env.ALLOWED_ORIGIN,
     optionsSuccessStatus: 200
 };
 app.use(cors(corsOptions));
