@@ -1,12 +1,18 @@
 require("express");
 
 const Pool = require('pg').Pool
-const pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
-    ssl: {
-        rejectUnauthorized: false
+let options
+if (process.env.NODE_ENV === "production") {
+    options = {
+        connectionString: process.env.DATABASE_URL,
+        ssl: {
+            rejectUnauthorized: false
+        }
     }
-});
+} else {
+    options = {connectionString: process.env.DATABASE_URL}
+}
+const pool = new Pool(options);
 
 const getWords = (request, response) => {
     pool.query('SELECT * FROM words ORDER BY word ASC', (error, results) => {

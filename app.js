@@ -16,7 +16,7 @@ app.use(
 )
 
 const corsOptions = {
-    origin: `*`,  //TODO <-- HOW TO SET THIS WHEN DEPLOYED ON HEROKU (WHEN NEEDED)?
+    origin: 'http://localhost:3000',  //TODO <-- HOW TO SET THIS WHEN DEPLOYED ON HEROKU (WHEN NEEDED)?
     optionsSuccessStatus: 200
 };
 app.use(cors(corsOptions));
@@ -27,7 +27,7 @@ app.get('/names', query.getNames)
 
 app.use(express.static('client'))
 app.get('*', (req, res) => {
-    res.sendFile('index.html')
+    res.sendFile(`${__dirname}/client/index.html`)
 })
 
 app.listen(port, () => {
