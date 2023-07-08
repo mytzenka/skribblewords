@@ -1,8 +1,5 @@
-const port = 3000                   //TODO <-- HOW TO SET THIS WHEN DEPLOYED TO HEROKU?
-const baseUrl = "http://localhost"  //TODO <-- HOW TO SET THIS WHEN DEPLOYED TO HEROKU?
-
-console.log(window.location.port);
-console.log(window.location.host);
+// const port = 3000                   //TODO <-- HOW TO SET THIS WHEN DEPLOYED TO HEROKU?
+const baseUrl = "https://skribbl-words.herokuapp.com/"  //TODO <-- HOW TO SET THIS WHEN DEPLOYED TO HEROKU?
 
 const inputWord = document.getElementById("inputWord")
 const submitFinalButton = document.getElementById("submitFinalButton")
@@ -72,7 +69,7 @@ function removeWordFromList() {
 
 function submitWords() {
     document.querySelectorAll('ul > li').forEach((i) => {
-        axios.post(`${baseUrl}:${port}/word`, {
+        axios.post(`${baseUrl}/word`, {
             word: i.innerText,
             name: inputName.value
         }).then(function (response) {
@@ -87,7 +84,7 @@ function submitWords() {
 
 function showSubmitModal() {
     submitModal.style.display='block';
-    axios.get(`${baseUrl}:${port}/names`)
+    axios.get(`${baseUrl}/names`)
         .then((response) => populateNamesList(response))
         .catch((error) => console.log(error))
 }
@@ -115,7 +112,7 @@ function displayAllWords(response) {
 }
 
 function fetchAllWords() {
-    axios.get(`${baseUrl}:${port}/words`)
+    axios.get(`${baseUrl}/words`)
         .then((response) => {displayAllWords(response)})
         .catch((error) => {console.log(error)})
 
