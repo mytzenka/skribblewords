@@ -69,7 +69,7 @@ const getNames = (request, response) => {
 const testDB = () => {
     pool.query('SELECT datname FROM pg_database', (error, results) => {
         if (!error) {
-            console.log(`database connection successful -> ${JSON.stringify(results.rows)}`);
+            console.log(`database connection successful`);
         } else {
             console.log(error);
         }

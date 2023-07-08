@@ -1,7 +1,8 @@
 const port = 3000                   //TODO <-- HOW TO SET THIS WHEN DEPLOYED TO HEROKU?
 const baseUrl = "http://localhost"  //TODO <-- HOW TO SET THIS WHEN DEPLOYED TO HEROKU?
 
-console.log(window.location.p);
+console.log(window.location.port);
+console.log(window.location.host);
 
 const inputWord = document.getElementById("inputWord")
 const submitFinalButton = document.getElementById("submitFinalButton")
