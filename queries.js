@@ -86,7 +86,7 @@ const testDB = () => {
 
 const createTables = () => {
     const sql = Fs.readFileSync('Database.sql').toString();
-    pool.query(sql, function(err, result) {
+    pool.query(sql, function(err, result){
         if(err){
             console.log('error: ', err);
             process.exit(1);
